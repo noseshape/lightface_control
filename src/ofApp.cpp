@@ -50,6 +50,18 @@ void ofApp::setup(){
 
 	bLearnBakground = true;
 	threshold = 80;
+    
+    //LF rect setup
+    int size = 200;
+    int gap = 10;
+
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            int x= ofGetWidth()/2+(size+gap)*j;
+            int y= gap*5+(size+gap)*i;
+            lfRect[i*3+j].setup(ofVec2f(x,y),size,10);
+        }
+    }
 
 }
 
@@ -60,6 +72,19 @@ void ofApp::update(){
     bNewFrame = false;
     vidGrabber.update();
     bNewFrame = vidGrabber.isFrameNew();
+    
+    
+    //LF rect control flow(HANNA HERE)
+    if(ofGetFrameNum()%10==0){
+        int a = ofRandom(0,9);
+        if(lfRect[a].status==3)lfRect[a].setStatus(1);
+        if(lfRect[a].status==0)lfRect[a].setStatus(2);
+    }
+    
+    //LF rect update
+    for(int i=0;i<9;i++){
+        lfRect[i].update();
+    }
 
 }
 
@@ -164,6 +189,12 @@ void ofApp::draw(){
             }
         }
     }
+    
+    //LF rect draw
+    for(int i=0;i<9;i++){
+        lfRect[i].draw();
+    }
+
 }
 
 //--------------------------------------------------------------
@@ -328,6 +359,7 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
+
 
 }
 

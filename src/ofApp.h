@@ -3,6 +3,7 @@
 #include "ofMain.h"
 
 #include "ofxOpenCv.h"
+#include "LfRect.hpp"
 
 
 class ofApp : public ofBaseApp{
@@ -82,6 +83,9 @@ public:
     int target_px_min = 20;
     int found_max = 40;
     int found_min = 0;
+    
+    //LF simulator
+    LfRect lfRect[9];
     
 };
 
